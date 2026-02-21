@@ -10,9 +10,14 @@ namespace Assets.Modifiers
     {
         public ModifierManager() { }
 
-        public void CreateModifier(string type)
+        public ModifierBase CreateModifier(string type)
         {
-            // 
+            ModifierBase modifier = null;
+
+
+
+
+            return modifier;
         }
     }
 }

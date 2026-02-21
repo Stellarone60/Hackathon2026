@@ -1,9 +1,10 @@
+using Assets.Modifiers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 // Base class for all modifiers.
-public abstract class Modifier<T> : MonoBehaviour
+public abstract class Modifier<T> : ModifierBase
 {
     // Needs to know what trait(s) it's modifying, and how to modify them.
 
