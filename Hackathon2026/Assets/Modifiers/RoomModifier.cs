@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assets.Modifiers
 {
-    public abstract class RoomModifier : Modifier
+    public abstract class RoomModifier : Modifier<int>
     {
-        public abstract void ApplyModifier();
     }
 }

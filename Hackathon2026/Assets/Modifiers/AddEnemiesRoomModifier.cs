@@ -8,7 +8,12 @@ namespace Assets.Modifiers
 {
     public class AddEnemiesRoomModifier : RoomModifier
     {
-        public override void ApplyModifier()
+        public AddEnemiesRoomModifier()
+        {
+            modifierName = "Add Enemies";
+            // Set sprite.
+        }
+        public override void ApplyModifier(int roomData)
         {
             // Need room data.
         }

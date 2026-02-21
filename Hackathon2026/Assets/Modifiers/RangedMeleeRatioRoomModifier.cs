@@ -8,7 +8,12 @@ namespace Assets.Modifiers
 {
     public class RangedMeleeRatioRoomModifier : RoomModifier
     {
-        public override void ApplyModifier()
+        public RangedMeleeRatioRoomModifier()
+        {
+            modifierName = "Ranged/Melee Ratio";
+            // Set sprite.
+        }
+        public override void ApplyModifier(int roomData)
         {
             // Need room data.
         }

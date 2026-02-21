@@ -8,6 +8,11 @@ namespace Assets.Modifiers
 {
     public class EnemySpeedModifier : EnemyModifier
     {
+        public EnemySpeedModifier()
+        {
+            modifierName = "Enemy Speed Modifier";
+            // Set sprite.
+        }
         public override void ApplyModifier(List<BasicEnemyScript> enemies)
         {
             foreach (BasicEnemyScript enemy in enemies)

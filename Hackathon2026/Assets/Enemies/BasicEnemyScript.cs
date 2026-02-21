@@ -1,38 +1,65 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BasicEnemyScript : MonoBehaviour
 {
     public float speed;
     public Transform player;
- 
+
+    public GameObject circlePrefab;   // Assign in Inspector
+    public GameObject circle = null;
+    public float spawnDistance = 1f;  // How far in front
+    public float circleLifetime = 1f; // How long it stays
+    public float attackCooldown = 2f; // Time between spawns
+    public float enemyAttackRange = 2f;
+
+    private float lastAttackTime = -Mathf.Infinity; // Initialize to allow immediate attack
+
     Rigidbody2D rigidBody;
-    // Start is called before the first frame update
+
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
+        float distanceToPlayer = Vector2.Distance(player.position, transform.position);
         Vector2 direction = (player.position - transform.position).normalized;
         rigidBody.velocity = direction * speed;
+        if (distanceToPlayer < enemyAttackRange || circle != null)
+        {
+            rigidBody.velocity = Vector2.zero; // Stop moving when attacking
+        }
     }
 
     void Update()
     {
-        Vector2 distanceToPlayer = player.position - transform.position;
-        if (distanceToPlayer.magnitude < 1.5f)
+        float distanceToPlayer = Vector2.Distance(player.position, transform.position);
+
+        if (distanceToPlayer < enemyAttackRange)
         {
-            //insert code to damage player here
-            transform.GetComponent<SpriteRenderer>().color = Color.yellow; // Change enemy color to yellow when close
+            GetComponent<SpriteRenderer>().color = Color.yellow;
+
+            if (Time.time >= lastAttackTime + attackCooldown)
+            {
+                //wait a moment before spawning the circle to give the player a chance to react
+                Invoke(nameof(SpawnCircle), 0.5f);
+                lastAttackTime = Time.time;
+            }
         }
         else
         {
-            transform.GetComponent<SpriteRenderer>().color = Color.red; // Reset enemy color when not close
+            GetComponent<SpriteRenderer>().color = Color.red;
         }
+    }
 
+    void SpawnCircle()
+    {
+        Vector2 direction = (player.position - transform.position).normalized;
+        Vector2 spawnPosition = (Vector2)transform.position + direction * spawnDistance;
+
+        circle = Instantiate(circlePrefab, spawnPosition, Quaternion.identity);
+
+        Destroy(circle, circleLifetime);
     }
 }

@@ -8,6 +8,11 @@ namespace Assets.Modifiers
 {
     public class EnemyDamageModifier : EnemyModifier
     {
+        public EnemyDamageModifier()
+        {
+            modifierName = "Enemy Damage Modifier";
+            // Set sprite.
+        }
         public override void ApplyModifier(List<BasicEnemyScript> enemies)
         {
             foreach (BasicEnemyScript enemy in enemies)
