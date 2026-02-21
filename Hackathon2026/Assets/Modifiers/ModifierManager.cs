@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace Assets.Modifiers
 {
-    public abstract class RoomModifier : Modifier<int>
+    public class ModifierManager
     {
+        public ModifierManager() { }
+
+        public void CreateModifier(string type)
+        {
+            // 
+        }
     }
 }

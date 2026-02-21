@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Assets.Modifiers
 {
-    public abstract class EnemyModifier : Modifier
+    public abstract class EnemyModifier : Modifier<List<BasicEnemyScript>>
     {
         // By this much our modifier will change the trait.
         public float valueModfier;
-        public abstract void ApplyModifier(List<BasicEnemyScript> enemies);
     }
 }
