@@ -14,8 +14,27 @@ namespace Assets.Modifiers
         {
             ModifierBase modifier = null;
 
-
-
+            switch (type)
+            {
+                case "EnemySpeedModifier":
+                    modifier = new EnemySpeedModifier();
+                    break;
+                case "EnemyHealthModifier":
+                    modifier = new EnemyHealthModifier();
+                    break;
+                case "EnemyDamageModifier":
+                    modifier = new EnemyDamageModifier();
+                    break;
+                case "AddEnemiesRoomModifier":
+                    modifier = new AddEnemiesRoomModifier();
+                    break;
+                case "AddTrapsRoomModifier":
+                    modifier = new AddTrapsRoomModifier();
+                    break;
+                case "RangedMeleeRatioRoomModifier":
+                    modifier = new RangedMeleeRatioRoomModifier();
+                    break;
+            }
 
             return modifier;
         }
