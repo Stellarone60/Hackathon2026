@@ -10,7 +10,7 @@ namespace Assets.Modifiers
     {
         public EnemySpeedModifier()
         {
-            modifierName = "Enemy Speed Modifier";
+            this.modifierName = "Enemy Speed Modifier";
             // Set sprite.
         }
         public override void ApplyModifier(List<BasicEnemyScript> enemies)

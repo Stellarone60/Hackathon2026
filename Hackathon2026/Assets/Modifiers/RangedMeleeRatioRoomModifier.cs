@@ -10,7 +10,7 @@ namespace Assets.Modifiers
     {
         public RangedMeleeRatioRoomModifier()
         {
-            modifierName = "Ranged/Melee Ratio";
+            this.modifierName = "Ranged/Melee Ratio";
             // Set sprite.
         }
         public override void ApplyModifier(int roomData)
