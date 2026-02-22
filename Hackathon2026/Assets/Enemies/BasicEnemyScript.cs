@@ -77,19 +77,14 @@ public class BasicEnemyScript : MonoBehaviour
         {
             case "currentHealth":
                 return(currentHealth);
-                break;
             case "maxHealth":
                 return(maxHealth);
-                break;
             case "damage":
                 return(damage);
-                break;
             case "movementSpeed":
                 return(movementSpeed);
-                break;
             default:
                 Debug.Log("Invalid stat requested");
-                break;
         }
         return(-Mathf.Infinity);
     }
