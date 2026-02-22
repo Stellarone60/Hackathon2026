@@ -4,28 +4,24 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ModifierView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class ModifierView : MonoBehaviour
 {
     [SerializeField] private Image icon;
     [SerializeField] private TMP_Text nameText;
     [SerializeField] private GameObject highlight;
     [SerializeField] private Button button;
+    [SerializeField] private TMP_Text description;
 
     private ModifierBase modifier;
-    private ModifierDescriptionDisplay descriptionDisplay;
 
     private bool isSelected = false;
-
-    public void Initialize(ModifierDescriptionDisplay descriptionDisplay)
-    {
-        this.descriptionDisplay = descriptionDisplay;
-    }
 
     public void Bind(ModifierBase modifier)
     {
         this.modifier = modifier;
         nameText.text = modifier.modifierName;
         icon.sprite = modifier.modifierSprite;
+        description.text = modifier.description;
 
         button.onClick.AddListener(OnClick);
     }
@@ -35,15 +31,5 @@ public class ModifierView : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         isSelected = !isSelected;
         highlight.SetActive(isSelected);
         Debug.Log("Clicked on modifier. Highlight set to active " + highlight.activeSelf);
-    }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        descriptionDisplay.SetText("Temporary description");
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        descriptionDisplay.SetText("");
     }
 }

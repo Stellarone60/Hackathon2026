@@ -23,9 +23,6 @@ public class ModifierViewTester : MonoBehaviour
         // Spawn the UI prefab (frontend)
         ModifierView view = Instantiate(modifierViewPrefab, parent);
 
-        // Initialize hover + selection logic
-        view.Initialize(descriptionDisplay);
-
 
         Debug.Log("About to call bind");
         // Bind backend → frontend

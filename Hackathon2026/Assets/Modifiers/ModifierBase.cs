@@ -16,5 +16,7 @@ namespace Assets.Modifiers
 
         public string modifierName = "";
 
+        public string description = "Temp description";
+
     }
 }
