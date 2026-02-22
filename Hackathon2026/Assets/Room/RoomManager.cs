@@ -43,7 +43,7 @@ public class RoomManager : MonoBehaviour
 
     }
 
-    void spawnChest()
+    public void spawnChest()
     {
         Instantiate(chestPrefab, Vector3.zero, Quaternion.identity);
     }
