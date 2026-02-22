@@ -39,7 +39,7 @@ public class RoomManager : MonoBehaviour
         foreach (var propType in propPrefabs)
         {
             Vector3 position = new Vector3(
-                Random.Range(1, roomWidth - 1) - roomHeight / 2,
+                Random.Range(1, roomWidth - 1) - roomWidth / 2,
                 Random.Range(1, roomHeight - 1) - roomHeight / 2);
 
             Instantiate(propType, position, Quaternion.identity);
