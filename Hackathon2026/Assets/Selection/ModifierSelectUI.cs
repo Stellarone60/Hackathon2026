@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Assets.Modifiers;
 using UnityEngine.UI;
+using System.Runtime.CompilerServices;
+using UnityEngine.Events; // Needed for UnityEvent
 public class ModifierSelectUI : MonoBehaviour
 {
     public List<ModifierBase> playerInventory = new List<ModifierBase>();
@@ -9,7 +11,10 @@ public class ModifierSelectUI : MonoBehaviour
 
     public GameObject inventory;
 
+    private bool isInventoryOpen = false;
+
     public GameObject modifierPrefab;
+    
 
 
     [SerializeField] private RectTransform contentParent;
@@ -21,17 +26,28 @@ public class ModifierSelectUI : MonoBehaviour
         playerInventory.Add(new EnemySpeedModifier());
         playerInventory.Add(new EnemySpeedModifier());
         playerInventory.Add(new EnemySpeedModifier());
+        inventory.SetActive(isInventoryOpen);
+        
         ShowModifiers();
         //PopulateUI();
     }
 
     void Update()
     {
-        // For testing, print selected items.
         if (Input.GetKeyDown(KeyCode.Space))
-        {
-            inventory.SetActive(true);
-        }
+    {
+        
+        isInventoryOpen = !isInventoryOpen;
+        inventory.SetActive(isInventoryOpen);
+
+
+    }
+    }
+
+    public void HandleButtonPress()
+    {
+        inventory.SetActive(false);
+        // TODO: REcord the selections.
     }
 
     public void AddModifier(string modifierName)
@@ -49,18 +65,23 @@ public class ModifierSelectUI : MonoBehaviour
         {
 
             GameObject obj = Instantiate(modifierPrefab, contentParent);
-            obj.GetComponent<ModifierView>().Bind(mod);
+            ModifierView view = obj.GetComponent<ModifierView>();
+            view.Bind(mod);
+            view.OnSelectionChanged.AddListener((isSelected) => OnModifierSelectionChanged(mod, isSelected));
+
         }
-        LayoutRebuilder.ForceRebuildLayoutImmediate(contentParent);
+
         
     }
 
     public void OnModifierSelectionChanged(ModifierBase modifier, bool selected)
     {
-        if (selected)
+        if (selected){
             selectedItems.Add(modifier);
-        else
+            Debug.Log("Modifier " + modifier.modifierName + " selected: ");}
+        else{
             selectedItems.Remove(modifier);
+            Debug.Log("Modifier " + modifier.modifierName + " deselected: ");}
 
     }
 }

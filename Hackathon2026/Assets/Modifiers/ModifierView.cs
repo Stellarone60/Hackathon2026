@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
+using UnityEngine.Events; // Needed for UnityEvent
 public class ModifierView : MonoBehaviour
 {
     [SerializeField] private Image icon;
@@ -11,10 +11,13 @@ public class ModifierView : MonoBehaviour
     [SerializeField] private GameObject highlight;
     [SerializeField] private Button button;
     [SerializeField] private TMP_Text description;
+    public UnityEvent<bool> OnSelectionChanged;
 
     private ModifierBase modifier;
 
     private bool isSelected = false;
+
+    public bool IsSelected => isSelected;
 
     public void Bind(ModifierBase modifier)
     {
@@ -31,5 +34,7 @@ public class ModifierView : MonoBehaviour
         isSelected = !isSelected;
         highlight.SetActive(isSelected);
         Debug.Log("Clicked on modifier. Highlight set to active " + highlight.activeSelf);
+
+        OnSelectionChanged?.Invoke(isSelected);
     }
 }
