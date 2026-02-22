@@ -3,27 +3,45 @@ using UnityEngine;
 using Assets.Modifiers;
 public class ModifierSelectUI : MonoBehaviour
 {
-    //public PlayerInventory playerInventory;
-    public GameObject modifierPrefab;
+    public List<ModifierBase> playerInventory = new List<ModifierBase>();
+    //public GameObject modifierPrefab;
+
+    public GameObject inventory;
     public Transform contentParent;
 
     private List<ModifierBase> selectedItems = new List<ModifierBase>();
 
     void Start()
     {
-        PopulateUI();
+        playerInventory.Add(new EnemySpeedModifier());
+        playerInventory.Add(new AddTrapsRoomModifier());
+        //PopulateUI();
     }
 
-    void PopulateUI()
+    void Update()
     {
-        // foreach (var item in playerInventory.items)
-        // {
-        //     GameObject obj = Instantiate(itemPrefab, contentParent);
-        //     obj.GetComponent<InventoryItemUI>().Setup(item, this);
-        // }
+        // For testing, print selected items.
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            inventory.SetActive(true);
+        }
     }
 
-    public void OnItemSelectionChanged(ModifierBase modifier, bool selected)
+    public void AddModifier(string modifierName)
+    {
+        playerInventory.Add(new EnemySpeedModifier());
+        //
+    }
+    // void PopulateUI()
+    // {
+    //     foreach (var item in playerInventory)
+    //     {
+    //         GameObject obj = Instantiate(modifierPrefab, contentParent);
+    //         obj.GetComponent<ModifierUI>().Setup(item, this);
+    //     }
+    // }
+
+    public void OnModifierSelectionChanged(ModifierBase modifier, bool selected)
     {
         if (selected)
             selectedItems.Add(modifier);
