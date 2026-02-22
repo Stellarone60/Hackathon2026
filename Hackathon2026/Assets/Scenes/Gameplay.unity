@@ -1148,7 +1148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbf65c6dc81904166bebbd78def0a3e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathPanel: {fileID: 0}
+  deathPanel: {fileID: 215753467}
 --- !u!1 &600377536
 GameObject:
   m_ObjectHideFlags: 0
@@ -1482,7 +1482,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 715201503532872781, guid: c4e35bf2239a84f8ba0258d861d3d897, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.00097262865
+      value: 0.000051012223
       objectReference: {fileID: 0}
     - target: {fileID: 715201503532872781, guid: c4e35bf2239a84f8ba0258d861d3d897, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1793,7 +1793,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 715201503532872781, guid: c4e35bf2239a84f8ba0258d861d3d897, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.00097262865
+      value: 0.000051012223
       objectReference: {fileID: 0}
     - target: {fileID: 715201503532872781, guid: c4e35bf2239a84f8ba0258d861d3d897, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3424,6 +3424,7 @@ MonoBehaviour:
   currentState: 0
   enemyModifierSelector: {fileID: 785724486}
   roomModifierSelector: {fileID: 1350584184}
+  deathPanel: {fileID: 215753467}
   spawnerPrefab: {fileID: 4498811970750799131, guid: c763edaf5a1004c478540bd3321eb909, type: 3}
   enemyPrefabs:
   - {fileID: 5456506475817639883, guid: 2d67b6f6ab7cab14eb191e9227a0717e, type: 3}
