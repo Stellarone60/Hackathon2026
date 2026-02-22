@@ -29,9 +29,23 @@ public class RoomManager : MonoBehaviour
         }
     }
 
+    void spawnProps()
+    {
+        foreach (var propType in propPrefabs)
+        {
+            Vector3 position = new Vector3(
+                Random.Range(1, roomWidth - 1) - roomHeight / 2,
+                Random.Range(1, roomHeight - 1) - roomHeight / 2);
+
+            Instantiate(propType, position, Quaternion.identity);
+        }
+
+    }
+
     void startRoom()
     {
         createSpawners();
+        spawnProps();
     }
 
     // Start is called before the first frame update

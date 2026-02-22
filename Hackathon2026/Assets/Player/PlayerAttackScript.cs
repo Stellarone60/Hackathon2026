@@ -21,5 +21,16 @@ public class PlayerAttackScript : MonoBehaviour
                Destroy(gameObject);
             }
         }
+
+        // check collision with prop
+        if (other.CompareTag("Obstacle"))
+        {
+            ObstacleScript obstacle = other.GetComponent<ObstacleScript>();
+
+            if(obstacle.getIsBreakable())
+            {
+                obstacle.destroy();
+            }
+        }
     }
 }
