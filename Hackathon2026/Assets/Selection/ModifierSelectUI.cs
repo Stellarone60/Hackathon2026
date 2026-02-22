@@ -7,6 +7,8 @@ public class ModifierSelectUI : MonoBehaviour
     //public GameObject modifierPrefab;
 
     public GameObject inventory;
+
+    public GameObject modifierPrefab;
     public Transform contentParent;
 
     private List<ModifierBase> selectedItems = new List<ModifierBase>();
@@ -14,7 +16,9 @@ public class ModifierSelectUI : MonoBehaviour
     void Start()
     {
         playerInventory.Add(new EnemySpeedModifier());
-        playerInventory.Add(new AddTrapsRoomModifier());
+        playerInventory.Add(new EnemySpeedModifier());
+        playerInventory.Add(new EnemySpeedModifier());
+        ShowModifiers();
         //PopulateUI();
     }
 
@@ -28,18 +32,27 @@ public class ModifierSelectUI : MonoBehaviour
     }
 
     public void AddModifier(string modifierName)
-    {
+    {   
+        // Should call factory to create this.
         playerInventory.Add(new EnemySpeedModifier());
         //
     }
-    // void PopulateUI()
-    // {
-    //     foreach (var item in playerInventory)
-    //     {
-    //         GameObject obj = Instantiate(modifierPrefab, contentParent);
-    //         obj.GetComponent<ModifierUI>().Setup(item, this);
-    //     }
-    // }
+    
+    public void ShowModifiers()
+    {
+        gameObject.SetActive(true);
+
+            foreach (var mod in playerInventory)
+            {
+
+                
+                GameObject obj = Instantiate(modifierPrefab, contentParent);
+                //ModifierUI uiItem = obj.GetComponent<ModifierUI>();
+
+                //iItem.Setup(mod, this);
+            }
+        
+    }
 
     public void OnModifierSelectionChanged(ModifierBase modifier, bool selected)
     {

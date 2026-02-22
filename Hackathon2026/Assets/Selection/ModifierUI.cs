@@ -5,32 +5,34 @@ using Assets.Modifiers;
 
 public class ModifierUI : MonoBehaviour
 {
-    public Image icon;
-    public Text nameText;
+    //public Image icon;
+    //public Text nameText;
     public Image selectionHighlight;
 
     private ModifierBase modifier;
-    //modifier UI goes here;
+
+    private ModifierSelectUI inventoryUI;
     private bool isSelected = false;
 
-    public void Setup(ModifierBase newModifier) // modifier UI
+    public void Setup(ModifierBase newModifier, ModifierSelectUI ui) // modifier UI
     {
         modifier = newModifier;
+        inventoryUI = ui;
         //inventoryUI = ui;
 
-        nameText.text = modifier.modifierName;
+        //nameText.text = modifier.modifierName;
         //icon.sprite = modifier.icon;
 
-        GetComponent<Button>().onClick.AddListener(ToggleSelection);
         UpdateVisual();
     }
 
-    void ToggleSelection()
-    {
-        isSelected = !isSelected;
-        //inventoryUI.OnModifierSelectionChanged(modifier, isSelected);
-        UpdateVisual();
-    }
+    // void ToggleSelection()
+    // {
+    //     isSelected = !isSelected;
+    //     //
+    //     inventoryUI.OnModifierSelectionChanged(modifier, isSelected);
+    //     UpdateVisual();
+    // }
 
     void UpdateVisual()
     {
