@@ -48,6 +48,7 @@ public class ModifierSelectUI : MonoBehaviour
         {
 
             GameObject obj = Instantiate(modifierPrefab, contentParent);
+            obj.GetComponent<ModifierView>().Bind(mod);
         }
         
     }
