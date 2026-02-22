@@ -18,6 +18,7 @@ public class PlayerAttackScript : MonoBehaviour
                     (enemy.getVelocity() + (other.transform.position - transform.position)).normalized;
 
                enemy.ApplyKnockback(knockbackDirection, knockbackForce);
+               Destroy(gameObject);
             }
         }
     }

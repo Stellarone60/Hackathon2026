@@ -13,7 +13,7 @@ public class PlayerScript : MonoBehaviour
     private Rigidbody2D rb;
     private CapsuleCollider2D cc;
     private Vector2 knockbackVelocity = Vector2.zero;
-    private float attackDuration = 1f;
+    public float attackDuration = 1f;
     private Vector2 LastMoveDirection = Vector2.zero;
     private float lastDashTime = -Mathf.Infinity; // Initialize to allow immediate dash
     private SpriteRenderer sr;

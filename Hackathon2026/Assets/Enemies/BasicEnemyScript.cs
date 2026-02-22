@@ -13,6 +13,8 @@ public class BasicEnemyScript : MonoBehaviour
     public float enemyAttackRange = 2f;
     private Vector2 knockbackVelocity = Vector2.zero;
     public float knockbackDecay = 5f;
+    private float timeSinceWithinRange = 0f;
+    private float maxTimeOutOfRange = 5f; 
 
     private float lastAttackTime = -Mathf.Infinity; // Initialize to allow immediate attack
 
@@ -62,6 +64,22 @@ public class BasicEnemyScript : MonoBehaviour
             Time.deltaTime * knockbackDecay
         );
         float distanceToPlayer = Vector2.Distance(player.position, transform.position);
+
+        if (distanceToPlayer < 7.5f)
+        {
+            timeSinceWithinRange += Time.deltaTime;
+            if (timeSinceWithinRange > maxTimeOutOfRange)
+            {
+                knockbackVelocity = player.position - transform.position;
+                knockbackVelocity.Normalize();
+                knockbackVelocity *= 10f;
+                timeSinceWithinRange = 0f; // Reset the timer after applying knockback
+            }
+        }
+        else
+        {
+            timeSinceWithinRange = 0f;
+        }
 
         if (distanceToPlayer < enemyAttackRange)
         {
