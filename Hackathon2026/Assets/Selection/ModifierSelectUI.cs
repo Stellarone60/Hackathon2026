@@ -9,7 +9,9 @@ public class ModifierSelectUI : MonoBehaviour
     public GameObject inventory;
 
     public GameObject modifierPrefab;
-    public Transform contentParent;
+
+
+    [SerializeField] private Transform contentParent;
 
     private List<ModifierBase> selectedItems = new List<ModifierBase>();
 
@@ -42,15 +44,11 @@ public class ModifierSelectUI : MonoBehaviour
     {
         gameObject.SetActive(true);
 
-            foreach (var mod in playerInventory)
-            {
+        foreach (var mod in playerInventory)
+        {
 
-                
-                GameObject obj = Instantiate(modifierPrefab, contentParent);
-                //ModifierUI uiItem = obj.GetComponent<ModifierUI>();
-
-                //iItem.Setup(mod, this);
-            }
+            GameObject obj = Instantiate(modifierPrefab, contentParent);
+        }
         
     }
 
