@@ -7,8 +7,8 @@ public class RoomManager : MonoBehaviour
 {
     [Header("Prefabs")]
     public GameObject spawnerPrefab;
-    public GameObject[] enemyPrefabs;
-    public GameObject[] propPrefabs;
+    public List<GameObject> enemyPrefabs;
+    public List<GameObject> propPrefabs;
     public GameObject chestPrefab;
 
     [Header("Room Settings")]
@@ -20,7 +20,7 @@ public class RoomManager : MonoBehaviour
     {
         int enemyCount = Random.Range(minEnemyCount, maxEnemyCount + 1);
         
-        int baseCount = enemyCount / enemyPrefabs.Length;
+        int baseCount = enemyCount / enemyPrefabs.Count;
         //Debug.Log(baseCount);
 
         foreach (var enemyType in enemyPrefabs)

@@ -21,8 +21,8 @@ public class GameLoopManager : MonoBehaviour {
     public GameObject roomModifierSelector;
         
     public GameObject spawnerPrefab;
-    public GameObject[] enemyPrefabs;
-    public GameObject[] propPrefabs;
+    public List<GameObject> enemyPrefabs;
+    public List<GameObject> propPrefabs;
     public GameObject chestPrefab; // need to pass these into room manager each cycle
 
     public GameObject Player;  
@@ -71,6 +71,8 @@ public class GameLoopManager : MonoBehaviour {
         Player.SetActive(false);
 
         ModifierSelectUI ui = roomModifierSelector.GetComponent<ModifierSelectUI>();
+        ui.playerInventory.Add(new AddTrapsRoomModifier());
+        ui.playerInventory.Add(new AddEnemiesRoomModifier());
 
         ui.SetIfActive(true);
 
@@ -83,6 +85,9 @@ public class GameLoopManager : MonoBehaviour {
         ui.SelectedItems.ForEach(modifier => activeModifiers.Add(modifier));
 
         ModifierSelectUI enemyIU = enemyModifierSelector.GetComponent<ModifierSelectUI>();
+        enemyIU.playerInventory.Add(new EnemyDamageModifier());
+        enemyIU.playerInventory.Add(new EnemyHealthModifier());
+        enemyIU.playerInventory.Add(new EnemySpeedModifier());
         enemyIU.SetIfActive(true);
     }
 
@@ -126,9 +131,7 @@ public class GameLoopManager : MonoBehaviour {
         roomManager.minEnemyCount = enemyCount;
         roomManager.maxEnemyCount = enemyCount + offset;
 
-        //Apply modifiers to the room manager here, if they affect room generation.
-        Debug.Log(roomManager.enemyPrefabs.Length);
-        roomManager.startRoom();
+        
 
         Player.SetActive(true);
 
@@ -160,6 +163,14 @@ public class GameLoopManager : MonoBehaviour {
                 roomMod.ApplyModifier(roomManager);
             }
         }
+
+        // Prefabs have a potential to change from modifiers, update them.
+        propPrefabs = roomManager.propPrefabs;
+        enemyPrefabs = roomManager.enemyPrefabs;
+
+        //Apply modifiers to the room manager here, if they affect room generation.
+        Debug.Log(roomManager.enemyPrefabs.Count);
+        roomManager.startRoom();
 
         playerInventory.Clear();
 

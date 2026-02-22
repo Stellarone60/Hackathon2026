@@ -19,6 +19,7 @@ namespace Assets.Modifiers
         {
             // Add a trap prop prefab to the room's prop prefabs.
             GameObject trapPrefab = Resources.Load<GameObject>("testTrap");
+            manager.propPrefabs.Add(trapPrefab);
         }
     }
 }

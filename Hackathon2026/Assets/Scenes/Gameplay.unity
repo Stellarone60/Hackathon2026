@@ -2918,8 +2918,7 @@ MonoBehaviour:
   spawnerPrefab: {fileID: 4498811970750799131, guid: c763edaf5a1004c478540bd3321eb909, type: 3}
   enemyPrefabs:
   - {fileID: 5456506475817639883, guid: 2d67b6f6ab7cab14eb191e9227a0717e, type: 3}
-  propPrefabs:
-  - {fileID: 2917223455403114808, guid: 0773e805a87eaaf4d95dba106780bdc8, type: 3}
+  propPrefabs: []
   chestPrefab: {fileID: 4506450158442384137, guid: aa8ec0b694333e447920465b89912822, type: 3}
   Player: {fileID: 2143469323}
 --- !u!114 &1915659213
