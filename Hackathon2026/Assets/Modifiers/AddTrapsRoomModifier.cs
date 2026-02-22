@@ -15,9 +15,10 @@ namespace Assets.Modifiers
             this.modifierSprite = Resources.Load<Sprite>("AddTrapsModifier");
             this.description = $"Adds traps to the room.";
         }
-        public override void ApplyModifier(int roomData)
+        public override void ApplyModifier(RoomManager manager)
         {
-            // Need room data.
+            // Add a trap prop prefab to the room's prop prefabs.
+            GameObject trapPrefab = Resources.Load<GameObject>("testTrap");
         }
     }
 }

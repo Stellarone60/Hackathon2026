@@ -9,15 +9,20 @@ namespace Assets.Modifiers
 {
     public class AddEnemiesRoomModifier : RoomModifier
     {
+        private int enemyNum = 0;
         public AddEnemiesRoomModifier()
         {
             this.modifierName = "Add Enemies";
             this.modifierSprite = Resources.Load<Sprite>("AddEnemiesModifier");
-            this.description = $"Adds enemies to the room.";
+
+            // Get a random number of enemies to add between 1 and 5.
+            enemyNum = UnityEngine.Random.Range(1, 6);
+
+            this.description = $"Upper limit for enemies increased by {enemyNum} for the room.";
         }
-        public override void ApplyModifier(int roomData)
+        public override void ApplyModifier(RoomManager manager)
         {
-            // Need room data.
+            manager.maxEnemyCount += enemyNum;
         }
     }
 }
