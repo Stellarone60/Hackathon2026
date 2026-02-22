@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,13 +12,14 @@ namespace Assets.Modifiers
         public EnemyDamageModifier()
         {
             this.modifierName = "Enemy Damage Modifier";
-            // Set sprite.
+            this.modifierSprite = Resources.Load<Sprite>("traxigor");
+            this.description = $"Alters the enemies' damage by {valueModfier}.";
         }
         public override void ApplyModifier(List<BasicEnemyScript> enemies)
         {
             foreach (BasicEnemyScript enemy in enemies)
             {
-                // change the damage of the enemy here.
+                enemy.setEnemyStats("damage", enemy.getEnemyStats("damage") * valueModfier);
             }
         }
     }

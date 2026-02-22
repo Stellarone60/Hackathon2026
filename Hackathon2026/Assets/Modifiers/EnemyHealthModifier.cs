@@ -12,21 +12,15 @@ namespace Assets.Modifiers
         public EnemyHealthModifier()
         {
             this.modifierName = "Enemy Health Modifier";
-            Debug.Log("Name set");
-            try
-            {
-                this.modifierSprite = Resources.Load<Sprite>("traxigor");
-            }
-            catch (Exception e)
-            {
-                Debug.LogError("Failed to load sprite: " + e.Message);
-            }
+            this.modifierSprite = Resources.Load<Sprite>("traxigor");
+            this.description = $"Alters the enemies' health by {valueModfier}.";
         }
         public override void ApplyModifier(List<BasicEnemyScript> enemies)
         {
             foreach (BasicEnemyScript enemy in enemies)
             {
-                // change the health of the enemy here.
+                enemy.setEnemyStats("maxHealth", enemy.getEnemyStats("maxHealth") * valueModfier);
+                enemy.setEnemyStats("currentHealth", enemy.getEnemyStats("currentHealth") * valueModfier);
             }
         }
     }
