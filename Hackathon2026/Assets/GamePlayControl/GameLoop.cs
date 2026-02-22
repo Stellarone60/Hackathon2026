@@ -29,12 +29,14 @@ public class GameLoopManager : MonoBehaviour {
     public List<GameObject> propPrefabs;
     public GameObject chestPrefab; // need to pass these into room manager each cycle
 
-    public GameObject Player;  
+    public GameObject Player;
+    public PlayerScript player;
 
     private List<ModifierBase> playerInventory = new List<ModifierBase>();
 
     private List<ModifierBase> activeModifiers = new List<ModifierBase>();
     private int playerLevel = 1;
+    private int currentEnemyCount;
 
     void Start() {
         ChangeState(GameState.Selection);
@@ -174,8 +176,9 @@ public class GameLoopManager : MonoBehaviour {
         enemyPrefabs = roomManager.enemyPrefabs;
 
         //Apply modifiers to the room manager here, if they affect room generation.
-        Debug.Log(roomManager.enemyPrefabs.Count);
+        //Debug.Log(roomManager.enemyPrefabs.Count);
         roomManager.startRoom();
+        currentEnemyCount = roomManager.enemyCount;
 
         playerInventory.Clear();
 
@@ -200,9 +203,26 @@ public class GameLoopManager : MonoBehaviour {
         // Go back to selection
         // scale up the xp. 
 
+        Player.GetComponent<PlayerScript>().addToStats("experience", 1 * currentEnemyCount);
 
         // TODO: increment player level and xp, then return to selection.
+        GameObject[] props = GameObject.FindGameObjectsWithTag("Obstacle");
+
+        foreach (GameObject prop in props)
+        {
+            Destroy(prop);
+        }
+
+        GameObject[] traps = GameObject.FindGameObjectsWithTag("Trap");
+
+        foreach (GameObject trap in traps)
+        {
+            Destroy(trap);
+        }
+
         currentState = GameState.Selection;
+        ChangeState(GameState.Selection); // Return to selection state
+
     }
 
 
@@ -259,6 +279,20 @@ public class GameLoopManager : MonoBehaviour {
 
         currentState = GameState.Selection;
         ChangeState(GameState.Selection); // Return to selection state
+    }
+
+    void Update()
+    {
+        /* END OF LEVEL */
+        // check that there are no more enemies existing
+        if(currentState == GameState.Combat)
+        {
+            if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
+            {
+                GiveReward();
+            }
+        }
+        
     }
 }
 

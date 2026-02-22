@@ -14,11 +14,13 @@ public class RoomManager : MonoBehaviour
     [Header("Room Settings")]
     public int minEnemyCount, maxEnemyCount;
     public int roomWidth, roomHeight;
-    
+
+    public int enemyCount;
+
 
     void createSpawners()
     {
-        int enemyCount = Random.Range(minEnemyCount, maxEnemyCount + 1);
+        enemyCount = Random.Range(minEnemyCount, maxEnemyCount + 1);
         
         int baseCount = enemyCount / enemyPrefabs.Count;
         //Debug.Log(baseCount);
