@@ -6,7 +6,7 @@ public class BasicEnemyScript : MonoBehaviour
     public Transform player;
 
     public GameObject circlePrefab;   // Assign in Inspector
-    public GameObject circle = null;
+    private GameObject circle = null;
     public float spawnDistance = 1f;  // How far in front
     public float circleLifetime = 1f; // How long it stays
     public float attackCooldown = 2f; // Time between spawns

@@ -2,9 +2,12 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CapsuleCollider2D))]
-public class SC_TopDownController : MonoBehaviour
+public class PlayerScript : MonoBehaviour
 {
-    Rigidbody2D rb;
+    public float knockbackDecay = 5f;
+    
+    private Rigidbody2D rb;
+    private Vector2 knockbackVelocity = Vector2.zero;
 
     public float runSpeed = 20.0f;
 
@@ -15,6 +18,16 @@ public class SC_TopDownController : MonoBehaviour
 
     void Update()
     {
+        // Smoothly reduce knockback over time
+        knockbackVelocity = Vector2.Lerp(
+            knockbackVelocity,
+            Vector2.zero,
+            Time.deltaTime * knockbackDecay
+        );
+    }
+
+    void FixedUpdate()
+    {
         MovePlayer();
     }
 
@@ -23,6 +36,16 @@ public class SC_TopDownController : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
 
-        rb.velocity = new Vector2(x * runSpeed, y * runSpeed);
+        Vector2 inputDirection = new Vector2(x, y).normalized;
+
+        rb.velocity = inputDirection * runSpeed + knockbackVelocity;
+    }
+    public void ApplyKnockback(Vector2 direction, float force)
+    {
+        knockbackVelocity = direction.normalized * force;
+    }
+    public Vector3 getVelocity()
+    {
+        return rb.velocity;
     }
 }
