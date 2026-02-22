@@ -1,38 +1,48 @@
 ﻿using Assets.Modifiers;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ModifierView : MonoBehaviour
+public class ModifierView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Image icon;
     [SerializeField] private TMP_Text nameText;
+    [SerializeField] private GameObject highlight;
+    [SerializeField] private Button button;
 
     private ModifierBase modifier;
+    private ModifierDescriptionDisplay descriptionDisplay;
+
+    private bool isSelected = false;
+
+    public void Initialize(ModifierDescriptionDisplay descriptionDisplay)
+    {
+        this.descriptionDisplay = descriptionDisplay;
+    }
 
     public void Bind(ModifierBase modifier)
     {
-        Debug.Log("In bind method");
-        try
-        {
-            this.modifier = modifier;
-            Debug.Log("About to bind text, modifier name is " + modifier.modifierName + "And name.text is " + nameText.text);
+        this.modifier = modifier;
+        nameText.text = modifier.modifierName;
+        icon.sprite = modifier.modifierSprite;
 
-            nameText.text = modifier.modifierName;
-            Debug.Log("Text bound, about to bind sprite");
+        button.onClick.AddListener(OnClick);
+    }
 
-            if(modifier.modifierSprite == null)
-            {
-                Debug.LogWarning("Modifier sprite is null for: " + modifier.modifierName);
-                return;
-            }
+    private void OnClick()
+    {
+        isSelected = !isSelected;
+        highlight.SetActive(isSelected);
+    }
 
-            icon.sprite = modifier.modifierSprite;
-            Debug.Log("Successfully bound modifiers");
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError("Failed to bind modifier: " + e.Message);
-        }
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        descriptionDisplay.SetText("Temporary description");
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        descriptionDisplay.SetText("");
     }
 }

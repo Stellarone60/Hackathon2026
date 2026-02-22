@@ -4,7 +4,9 @@ using UnityEngine;
 public class ModifierViewTester : MonoBehaviour
 {
     [SerializeField] private ModifierView modifierViewPrefab;
-    [SerializeField] private Transform parent;   // UI parent under your Canvas
+    [SerializeField] private Transform parent;   // UI parent under canvas
+    [SerializeField] private ModifierDescriptionDisplay descriptionDisplay;
+
 
     private void Start()
     {
@@ -20,14 +22,12 @@ public class ModifierViewTester : MonoBehaviour
 
         // Spawn the UI prefab (frontend)
         ModifierView view = Instantiate(modifierViewPrefab, parent);
-        if(view.enabled == false)
-        {
-            Debug.LogError("ModifierView prefab is disabled. Please enable it to see the test.");
-            yield break;
-        }
-        view.enabled = true;
 
-        Debug.Log("About to bind");
+        // Initialize hover + selection logic
+        view.Initialize(descriptionDisplay);
+
+
+        Debug.Log("About to call bind");
         // Bind backend → frontend
         view.Bind(testModifier);
     }
