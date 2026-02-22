@@ -1,5 +1,9 @@
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Events; // Needed for UnityEvent
+
+ [System.Serializable] 
+public class FloatEvent : UnityEvent<float> { }
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CapsuleCollider2D))]
@@ -19,6 +23,7 @@ public class PlayerScript : MonoBehaviour
     private float lastDashTime = -Mathf.Infinity; // Initialize to allow immediate dash
     private float lastAttackTime = -Mathf.Infinity;
     private SpriteRenderer sr;
+    
 
     public float runSpeed = 20.0f;
 
@@ -26,7 +31,9 @@ public class PlayerScript : MonoBehaviour
 
     //%%%%%%%%%%%%%%//
     // Player Stats //
-    private float currentHealth = 100f;
+    public float currentHealth = 100f;
+
+    public FloatEvent OnHealthChanged = new FloatEvent(); // Event to notify health changes
     private float maxHealth = 100f;
     private float damage = 5f;
     private float movementSpeed = 2.5f;
@@ -233,6 +240,7 @@ public class PlayerScript : MonoBehaviour
         {
             case "currentHealth":
                 currentHealth -= value;
+                OnHealthChanged?.Invoke(currentHealth);
                 takeDamage();
                 break;
             case "maxHealth":
@@ -336,5 +344,11 @@ public class PlayerScript : MonoBehaviour
 
         animator.SetBool("Idling", idling);
         animator.SetBool("Walking", running);
+    }
+
+    public void ResetHealth()
+    {
+        currentHealth = maxHealth;
+        
     }
 }

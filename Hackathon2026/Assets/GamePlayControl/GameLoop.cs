@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Assets.Modifiers;
+using System.Diagnostics.Tracing;
 
 public enum GameState {
     Selection,
     RoomGeneration,
     Combat,
     Reward,
-    Transition
+    Transition,
+    Dead
 }
 
 
@@ -19,6 +21,8 @@ public class GameLoopManager : MonoBehaviour {
     public GameObject enemyModifierSelector;
 
     public GameObject roomModifierSelector;
+
+    public GameObject deathPanel;
         
     public GameObject spawnerPrefab;
     public GameObject[] enemyPrefabs;
@@ -34,6 +38,7 @@ public class GameLoopManager : MonoBehaviour {
 
     void Start() {
         ChangeState(GameState.Selection);
+        Player.GetComponent<PlayerScript>().OnHealthChanged.AddListener(HandlePlayerHealthChanged);
 
         //enemyModifierSelector.GetComponent<ModifierSelectUI>().OnConfirmButtonPress.AddListener(HandleConfirmEnemy);
        // roomModifierSelector.GetComponent<ModifierSelectUI>().OnConfirmButtonPress.AddListener(HandleConfirmRoom);
@@ -189,10 +194,60 @@ public class GameLoopManager : MonoBehaviour {
         currentState = GameState.Selection;
     }
 
-    void Update() {
-        if (currentState == GameState.Combat) {
-            // check if all enemies are defeated, if so, move to reward state.
+
+
+    void HandlePlayerHealthChanged(float newHealth)
+    {
+        if (newHealth <= 0)
+        {
+            // Handle player death (e.g., restart game, show game over screen, etc.)
+            Debug.Log("Player has died!");
+
+            this.playerLevel = 1; // Reset player level on death
+
+            deathPanel.SetActive(true); // Show death panel
+
+            Player.SetActive(false); // Hide player on death
+
+            activeModifiers.Clear(); // Clear active modifiers on death
+
+            playerInventory.Clear(); // Clear player inventory on death
+
+            this.currentState = GameState.Dead;
+
         }
+    }
+
+    public void HandleDeathContinue()
+    {
+        // Reset player health and position, clear modifiers, and return to selection state
+        PlayerScript playerScript = Player.GetComponent<PlayerScript>();
+        playerScript.ResetHealth();
+        Player.transform.position = Vector3.zero; // Reset position to start of room or a safe location
+
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        foreach (GameObject enemy in enemies)
+        {
+            Destroy(enemy);
+        }
+
+        GameObject[] props = GameObject.FindGameObjectsWithTag("Obstacle");
+
+        foreach (GameObject prop in props)
+        {
+            Destroy(prop);
+        }
+
+        GameObject[] traps = GameObject.FindGameObjectsWithTag("Trap");
+
+        foreach (GameObject trap in traps)
+        {
+            Destroy(trap);
+        }
+
+        currentState = GameState.Selection;
+        ChangeState(GameState.Selection); // Return to selection state
     }
 }
 
