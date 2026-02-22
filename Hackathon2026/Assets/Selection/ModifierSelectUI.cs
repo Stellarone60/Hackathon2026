@@ -11,15 +11,17 @@ public class ModifierSelectUI : MonoBehaviour
 
     public GameObject inventory;
 
+    public UnityEvent OnConfirmButtonPress = new UnityEvent();
+
     private bool isInventoryOpen = false;
 
     public GameObject modifierPrefab;
-    
-
 
     [SerializeField] private RectTransform contentParent;
 
     private List<ModifierBase> selectedItems = new List<ModifierBase>();
+
+    public List<ModifierBase> SelectedItems => selectedItems;
 
     void Start()
     {
@@ -32,21 +34,16 @@ public class ModifierSelectUI : MonoBehaviour
         //PopulateUI();
     }
 
-    void Update()
+    public void SetIfActive(bool active)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-    {
-        
-        isInventoryOpen = !isInventoryOpen;
-        inventory.SetActive(isInventoryOpen);
-
-
-    }
+        inventory.SetActive(active);
     }
 
     public void HandleButtonPress()
     {
         inventory.SetActive(false);
+
+        OnConfirmButtonPress?.Invoke();
         // TODO: REcord the selections.
     }
 

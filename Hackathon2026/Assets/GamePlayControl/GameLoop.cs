@@ -11,22 +11,39 @@ public enum GameState {
     Transition
 }
 
-public class GameLoopManager : MonoBehaviour {
-    private GameState currentState;
 
+
+public class GameLoopManager : MonoBehaviour {
+    public GameState currentState;
+
+    public GameObject enemyModifierSelector;
+
+    public GameObject roomModifierSelector;
         
     public GameObject spawnerPrefab;
     public GameObject[] enemyPrefabs;
     public GameObject[] propPrefabs;
     public GameObject chestPrefab; // need to pass these into room manager each cycle
 
-    private List<ModifierBase> playerInventor = new List<ModifierBase>();
+    public GameObject Player;  
 
+    private List<ModifierBase> playerInventory = new List<ModifierBase>();
+
+    private List<ModifierBase> activeModifiers = new List<ModifierBase>();
     private int playerLevel = 1;
 
     void Start() {
         ChangeState(GameState.Selection);
+
+        //enemyModifierSelector.GetComponent<ModifierSelectUI>().OnConfirmButtonPress.AddListener(HandleConfirmEnemy);
+       // roomModifierSelector.GetComponent<ModifierSelectUI>().OnConfirmButtonPress.AddListener(HandleConfirmRoom);
     }
+
+    void Awake() {
+    enemyModifierSelector.GetComponent<ModifierSelectUI>().OnConfirmButtonPress.AddListener(HandleConfirmEnemy);
+    roomModifierSelector.GetComponent<ModifierSelectUI>().OnConfirmButtonPress.AddListener(HandleConfirmRoom);
+}
+
 
     public void ChangeState(GameState newState) {
         currentState = newState;
@@ -51,9 +68,29 @@ public class GameLoopManager : MonoBehaviour {
     void StartSelection() {
         // Acticate the modifier selection UI and allow the player to choose modifiers.
         // Once all are selected and submitted, move to room generation
+        Player.SetActive(false);
 
-        currentState = GameState.RoomGeneration;
-        ChangeState(currentState);
+        ModifierSelectUI ui = roomModifierSelector.GetComponent<ModifierSelectUI>();
+
+        ui.SetIfActive(true);
+
+    }
+
+    void HandleConfirmRoom()
+    {
+
+        ModifierSelectUI ui = roomModifierSelector.GetComponent<ModifierSelectUI>();
+        ui.SelectedItems.ForEach(modifier => activeModifiers.Add(modifier));
+
+        ModifierSelectUI enemyIU = enemyModifierSelector.GetComponent<ModifierSelectUI>();
+        enemyIU.SetIfActive(true);
+    }
+
+    void HandleConfirmEnemy()
+    {
+        ModifierSelectUI ui = enemyModifierSelector.GetComponent<ModifierSelectUI>();
+        ui.SelectedItems.ForEach(modifier => activeModifiers.Add(modifier));
+        ChangeState(GameState.RoomGeneration);  
     }
 
     void GenerateRoom() {
@@ -93,7 +130,13 @@ public class GameLoopManager : MonoBehaviour {
         Debug.Log(roomManager.enemyPrefabs.Length);
         roomManager.startRoom();
 
+        Player.SetActive(true);
+
         currentState = GameState.Combat;
+
+        // TODO: apply modifiers to player stats here, if they affect combat.
+
+        playerInventory.Clear();
 
         ChangeState(currentState);
 
