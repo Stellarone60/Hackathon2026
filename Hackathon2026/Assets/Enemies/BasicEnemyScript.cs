@@ -11,6 +11,8 @@ public class BasicEnemyScript : MonoBehaviour
     public float attackDuration = 1f; // How long it stays
     public float attackCooldown = 2f; // Time between spawns
     public float enemyAttackRange = 2f;
+    private Vector2 knockbackVelocity = Vector2.zero;
+    public float knockbackDecay = 5f;
 
     private float lastAttackTime = -Mathf.Infinity; // Initialize to allow immediate attack
 
@@ -35,15 +37,30 @@ public class BasicEnemyScript : MonoBehaviour
     {
         float distanceToPlayer = Vector2.Distance(player.position, transform.position);
         Vector2 direction = (player.position - transform.position).normalized;
-        rigidBody.velocity = direction * movementSpeed;
+        rigidBody.velocity = direction * movementSpeed + knockbackVelocity;
         if (distanceToPlayer < enemyAttackRange || attack != null)
         {
-            rigidBody.velocity = Vector2.zero; // Stop moving when attacking
+            rigidBody.velocity = Vector2.zero + knockbackVelocity; // Stop moving when attacking
         }
+    }
+
+    public Vector3 getVelocity()
+    {
+        return rigidBody.velocity;
+    }
+
+    public void ApplyKnockback(Vector2 direction, float force)
+    {
+        knockbackVelocity = direction.normalized * force;
     }
 
     void Update()
     {
+        knockbackVelocity = Vector2.Lerp(
+            knockbackVelocity,
+            Vector2.zero,
+            Time.deltaTime * knockbackDecay
+        );
         float distanceToPlayer = Vector2.Distance(player.position, transform.position);
 
         if (distanceToPlayer < enemyAttackRange)
