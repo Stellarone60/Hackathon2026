@@ -53,10 +53,10 @@ public class PlayerScript : MonoBehaviour
         );
         checkAttack();
         checkDash();
-        Debug.Log("Player Health: " + currentHealth);
+       // Debug.Log("Player Health: " + currentHealth);
         if (currentHealth <= 0)
         {
-            Debug.Log("Player has died.");
+          //  Debug.Log("Player has died.");
             // Implement death behavior here (e.g., respawn, game over screen, etc.)
         }
         ApplyAnimation();

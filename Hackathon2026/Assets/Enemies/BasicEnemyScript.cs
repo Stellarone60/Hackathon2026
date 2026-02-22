@@ -5,7 +5,7 @@ public class BasicEnemyScript : MonoBehaviour
     public float speed;
     public Transform player;
 
-    public GameObject circlePrefab;   // Assign in Inspector
+    public GameObject enemyAttack;   // Assign in Inspector
     private GameObject attack = null;
     public float spawnDistance = 1f;  // How far in front
     public float attackDuration = 1f; // How long it stays
@@ -31,7 +31,7 @@ public class BasicEnemyScript : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
-        circlePrefab = GameObject.FindWithTag("Attack");
+        enemyAttack = GameObject.FindWithTag("Attack");
         rigidBody = GetComponent<Rigidbody2D>();
     }
 
@@ -103,7 +103,7 @@ public class BasicEnemyScript : MonoBehaviour
         Vector2 direction = (player.position - transform.position).normalized;
         Vector2 spawnPosition = (Vector2)transform.position + direction * spawnDistance;
 
-        attack = Instantiate(circlePrefab, spawnPosition, Quaternion.identity);
+        attack = Instantiate(enemyAttack, spawnPosition, Quaternion.identity);
 
         Destroy(attack, attackDuration);
     }
@@ -113,13 +113,13 @@ public class BasicEnemyScript : MonoBehaviour
         switch (stat)
         {
             case "currentHealth":
-                return(currentHealth);
+                return currentHealth;
             case "maxHealth":
-                return(maxHealth);
+                return maxHealth;
             case "damage":
-                return(damage);
+                return damage;
             case "movementSpeed":
-                return(movementSpeed);
+                return movementSpeed;
             default:
                 Debug.Log("Invalid stat requested");
                 break;
@@ -221,6 +221,10 @@ public class BasicEnemyScript : MonoBehaviour
         {
             case "currentHealth":
                 currentHealth -= value;
+                if (currentHealth <= 0)
+                {
+                    Destroy(gameObject);
+                }
                 break;
             case "maxHealth":
                 maxHealth -= value;

@@ -163,8 +163,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2.5
   player: {fileID: 0}
-  circlePrefab: {fileID: 0}
+  circlePrefab: {fileID: 1765136887246865002, guid: 8bd42d7e1bb891c4f9c8ac6a0b5f7ea0, type: 3}
   spawnDistance: 1
   attackDuration: 1
   attackCooldown: 2
   enemyAttackRange: 1.9
+  knockbackDecay: 5

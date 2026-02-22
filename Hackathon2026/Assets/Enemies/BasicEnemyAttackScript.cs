@@ -5,18 +5,23 @@ using UnityEngine;
 public class BasicEnemyAttackScript : MonoBehaviour
 {
     public float knockbackForce = 1.0f;
+    // public connection to the enemy script to get damage value
+    public GameObject enemyScript;
+
     // if player is in the circle, apply knockback
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             PlayerScript player = other.GetComponent<PlayerScript>();
+            BasicEnemyScript enemy = enemyScript.GetComponent<BasicEnemyScript>();
 
             if (player != null)
             {
                 Vector2 knockbackDirection =
                     (player.getVelocity() + (other.transform.position - transform.position)).normalized;
-                player.subtractFromStats("health", 10f);
+                Debug.Log(enemy.getEnemyStats("damage"));
+                player.subtractFromStats("health", 5f);
                 player.ApplyKnockback(knockbackDirection, 5f);
             }
         }

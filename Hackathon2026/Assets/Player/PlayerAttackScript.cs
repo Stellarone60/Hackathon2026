@@ -16,7 +16,7 @@ public class PlayerAttackScript : MonoBehaviour
             {
                 Vector2 knockbackDirection =
                     ((other.transform.position - transform.position)).normalized;
-
+               enemy.subtractFromStats("health", gameObject.GetComponent<PlayerScript>().getPlayerStats("damage"));
                enemy.ApplyKnockback(knockbackDirection, knockbackForce);
             }
         }
