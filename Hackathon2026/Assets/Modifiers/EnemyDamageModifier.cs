@@ -12,7 +12,7 @@ namespace Assets.Modifiers
         public EnemyDamageModifier()
         {
             this.modifierName = "Enemy Damage Modifier";
-            this.modifierSprite = Resources.Load<Sprite>("traxigor");
+            this.modifierSprite = Resources.Load<Sprite>("AttackModifier");
             this.description = $"Alters the enemies' damage by {valueModfier}.";
         }
         public override void ApplyModifier(List<BasicEnemyScript> enemies)
