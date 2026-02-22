@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Assets.Modifiers;
+using UnityEngine.UI;
 public class ModifierSelectUI : MonoBehaviour
 {
     public List<ModifierBase> playerInventory = new List<ModifierBase>();
@@ -11,7 +12,7 @@ public class ModifierSelectUI : MonoBehaviour
     public GameObject modifierPrefab;
 
 
-    [SerializeField] private Transform contentParent;
+    [SerializeField] private RectTransform contentParent;
 
     private List<ModifierBase> selectedItems = new List<ModifierBase>();
 
@@ -50,6 +51,7 @@ public class ModifierSelectUI : MonoBehaviour
             GameObject obj = Instantiate(modifierPrefab, contentParent);
             obj.GetComponent<ModifierView>().Bind(mod);
         }
+        LayoutRebuilder.ForceRebuildLayoutImmediate(contentParent);
         
     }
 
