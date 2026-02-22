@@ -12,7 +12,7 @@ namespace Assets.Modifiers
         public EnemySpeedModifier()
         {
             this.modifierName = "Enemy Speed Modifier";
-            this.modifierSprite = Resources.Load<Sprite>("traxigor");
+            this.modifierSprite = Resources.Load<Sprite>("SpeedModifier");
             this.description = $"Alters the enemies' speed by {valueModfier}.";
         }
         public override void ApplyModifier(List<BasicEnemyScript> enemies)
