@@ -62,7 +62,7 @@ public class RoomManager : MonoBehaviour
     void Start()
     {
         // need to make everything blank
-        // startRoom();
+         startRoom();
         // spawnChest();
     }
 

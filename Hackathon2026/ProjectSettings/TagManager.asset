@@ -9,6 +9,7 @@ TagManager:
   - UI
   - playerAttack
   - Obstacle
+  - Trap
   layers:
   - Default
   - TransparentFX
