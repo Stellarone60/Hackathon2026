@@ -135,6 +135,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2064792793692411945, guid: 2d67b6f6ab7cab14eb191e9227a0717e, type: 3}
+      propertyPath: attackDuration
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5456506475817639883, guid: 2d67b6f6ab7cab14eb191e9227a0717e, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -668,6 +672,18 @@ PrefabInstance:
       propertyPath: attackPrefab
       value: 
       objectReference: {fileID: 247538519}
+    - target: {fileID: 2241656170453797219, guid: 193944909501e7b48b2fdc4cefbf10d6, type: 3}
+      propertyPath: m_Size.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2241656170453797219, guid: 193944909501e7b48b2fdc4cefbf10d6, type: 3}
+      propertyPath: m_Size.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2241656170453797219, guid: 193944909501e7b48b2fdc4cefbf10d6, type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3926418843626373225, guid: 193944909501e7b48b2fdc4cefbf10d6, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.05
@@ -740,6 +756,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6289702158000624263, guid: 33630a48fa29a1644aefd9e867e3b6d4, type: 3}
+      propertyPath: m_Radius
+      value: 19.937439
+      objectReference: {fileID: 0}
+    - target: {fileID: 6289702158000624263, guid: 33630a48fa29a1644aefd9e867e3b6d4, type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6289702158000624263, guid: 33630a48fa29a1644aefd9e867e3b6d4, type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7061856301648064931, guid: 33630a48fa29a1644aefd9e867e3b6d4, type: 3}
       propertyPath: m_Name
       value: playerAttack

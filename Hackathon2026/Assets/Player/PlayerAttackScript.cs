@@ -15,10 +15,9 @@ public class PlayerAttackScript : MonoBehaviour
             if (enemy != null)
             {
                 Vector2 knockbackDirection =
-                    (enemy.getVelocity() + (other.transform.position - transform.position)).normalized;
+                    ((other.transform.position - transform.position)).normalized;
 
                enemy.ApplyKnockback(knockbackDirection, knockbackForce);
-               Destroy(gameObject);
             }
         }
 

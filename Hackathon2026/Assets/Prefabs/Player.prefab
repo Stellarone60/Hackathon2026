@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8bfba398d667264e9a68b2f749265d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPrefab: {fileID: 0}
+  attackPrefab: {fileID: 7061856301648064931, guid: 33630a48fa29a1644aefd9e867e3b6d4, type: 3}
   knockbackDecay: 5
   spawnDistance: 1
   dashCooldown: 2
