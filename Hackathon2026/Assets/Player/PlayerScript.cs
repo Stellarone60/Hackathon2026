@@ -44,8 +44,7 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             Debug.Log("Key Pressed");
-            Invoke(nameof(LaunchAttack), 0.5f);
-           // lastAttackTime = Time.time;
+            Invoke(nameof(LaunchAttack), 0f);
         }
         else{
             Debug.Log("Key Not Pressed");
