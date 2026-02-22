@@ -33,7 +33,7 @@ public class BasicEnemyScript : MonoBehaviour
     {
         float distanceToPlayer = Vector2.Distance(player.position, transform.position);
         Vector2 direction = (player.position - transform.position).normalized;
-        rigidBody.velocity = direction * speed;
+        rigidBody.velocity = direction * movementSpeed;
         if (distanceToPlayer < enemyAttackRange || attack != null)
         {
             rigidBody.velocity = Vector2.zero; // Stop moving when attacking
@@ -85,6 +85,7 @@ public class BasicEnemyScript : MonoBehaviour
                 return(movementSpeed);
             default:
                 Debug.Log("Invalid stat requested");
+                break;
         }
         return(-Mathf.Infinity);
     }
