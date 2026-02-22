@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -12,11 +13,14 @@ public class PlayerScript : MonoBehaviour
     private Rigidbody2D rb;
     private CapsuleCollider2D cc;
     private Vector2 knockbackVelocity = Vector2.zero;
-    private float attackDuration = 1f;
+    public float attackDuration = 1f;
     private Vector2 LastMoveDirection = Vector2.zero;
     private float lastDashTime = -Mathf.Infinity; // Initialize to allow immediate dash
+    private SpriteRenderer sr;
 
     public float runSpeed = 20.0f;
+
+    Animator animator;
 
     //%%%%%%%%%%%%%%//
     // Player Stats //
@@ -32,6 +36,11 @@ public class PlayerScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         cc = GetComponent<CapsuleCollider2D>();
+        sr = GetComponent<SpriteRenderer>();
+        //animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
+
+
     }
 
     void Update()
@@ -44,6 +53,8 @@ public class PlayerScript : MonoBehaviour
         );
         checkAttack();
         checkDash();
+
+        ApplyAnimation();
     }
 
     void checkAttack()
@@ -278,5 +289,31 @@ public class PlayerScript : MonoBehaviour
                 Debug.Log("Invalid stat change requested");
                 break;
         }
+    }
+
+    private void ApplyAnimation()
+    {
+        bool running = false;
+        bool idling = false;
+
+        if (rb.velocity.x != 0 || rb.velocity.y != 0)
+        {
+            running = true;
+            if (rb.velocity.x > 0)
+            {
+                sr.flipX = false;
+            }
+            else
+            {
+                sr.flipX = true;
+            }
+        }
+        else
+        {
+            idling = true;
+        }
+
+        animator.SetBool("Idling", idling);
+        animator.SetBool("Walking", running);
     }
 }

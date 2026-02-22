@@ -6,16 +6,13 @@ public class EnemySpawner : MonoBehaviour
 {
     public GameObject enemyPrefab;
 
-    public int minEnemyCount = 2;
-    public int maxEnemyCount = 4;
+    public int enemyCount;
 
     public int roomWidth = 16;
     public int roomHeight = 6;
 
-    // Start is called before the first frame update
-    void Start()
+    public void spawnEnemy()
     {
-        int enemyCount = Random.Range(minEnemyCount, maxEnemyCount + 1);
 
         for (int i = 0; i < enemyCount; i++) 
         {
