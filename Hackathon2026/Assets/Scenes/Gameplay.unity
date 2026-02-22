@@ -1482,7 +1482,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 715201503532872781, guid: c4e35bf2239a84f8ba0258d861d3d897, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.000051012223
+      value: 2.0105813
       objectReference: {fileID: 0}
     - target: {fileID: 715201503532872781, guid: c4e35bf2239a84f8ba0258d861d3d897, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1793,7 +1793,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 715201503532872781, guid: c4e35bf2239a84f8ba0258d861d3d897, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.000051012223
+      value: 2.0105813
       objectReference: {fileID: 0}
     - target: {fileID: 715201503532872781, guid: c4e35bf2239a84f8ba0258d861d3d897, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3387,6 +3387,7 @@ GameObject:
   - component: {fileID: 1915659211}
   - component: {fileID: 1915659212}
   - component: {fileID: 1915659213}
+  - component: {fileID: 1915659214}
   m_Layer: 0
   m_Name: MainGameplay
   m_TagString: Untagged
@@ -3431,6 +3432,7 @@ MonoBehaviour:
   propPrefabs: []
   chestPrefab: {fileID: 4506450158442384137, guid: aa8ec0b694333e447920465b89912822, type: 3}
   Player: {fileID: 2143469323}
+  player: {fileID: 0}
 --- !u!114 &1915659213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3451,6 +3453,19 @@ MonoBehaviour:
   maxEnemyCount: 0
   roomWidth: 0
   roomHeight: 0
+  enemyCount: 0
+--- !u!114 &1915659214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915659210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e6e4de62ec104c4f8f388e51922cc66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1946532967
 GameObject:
   m_ObjectHideFlags: 0

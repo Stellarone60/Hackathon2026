@@ -251,34 +251,8 @@ public class GameLoopManager : MonoBehaviour {
 
     public void HandleDeathContinue()
     {
-        // Reset player health and position, clear modifiers, and return to selection state
-        PlayerScript playerScript = Player.GetComponent<PlayerScript>();
-        playerScript.ResetHealth();
-        Player.transform.position = Vector3.zero; // Reset position to start of room or a safe location
-
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-        foreach (GameObject enemy in enemies)
-        {
-            Destroy(enemy);
-        }
-
-        GameObject[] props = GameObject.FindGameObjectsWithTag("Obstacle");
-
-        foreach (GameObject prop in props)
-        {
-            Destroy(prop);
-        }
-
-        GameObject[] traps = GameObject.FindGameObjectsWithTag("Trap");
-
-        foreach (GameObject trap in traps)
-        {
-            Destroy(trap);
-        }
-
-        currentState = GameState.Selection;
-        ChangeState(GameState.Selection); // Return to selection state
+        Restart restart = GetComponent<Restart>();
+        restart.RestartGame();
     }
 
     void Update()
