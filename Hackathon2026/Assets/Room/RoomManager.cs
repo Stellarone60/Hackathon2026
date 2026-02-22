@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 public class RoomManager : MonoBehaviour
@@ -13,11 +14,14 @@ public class RoomManager : MonoBehaviour
     [Header("Room Settings")]
     public int minEnemyCount, maxEnemyCount;
     public int roomWidth, roomHeight;
+    
 
     void createSpawners()
     {
         int enemyCount = Random.Range(minEnemyCount, maxEnemyCount + 1);
+        
         int baseCount = enemyCount / enemyPrefabs.Length;
+        //Debug.Log(baseCount);
 
         foreach (var enemyType in enemyPrefabs)
         {
@@ -43,12 +47,12 @@ public class RoomManager : MonoBehaviour
 
     }
 
-    public void spawnChest()
+    void spawnChest()
     {
         Instantiate(chestPrefab, Vector3.zero, Quaternion.identity);
     }
 
-    void startRoom()
+    public void startRoom()
     {
         createSpawners();
         spawnProps();
@@ -57,13 +61,14 @@ public class RoomManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startRoom();
-        spawnChest();
+        // need to make everything blank
+        // startRoom();
+        // spawnChest();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        // TODO: seatch for tag and if no enemies, spawn chest.
     }
 }
