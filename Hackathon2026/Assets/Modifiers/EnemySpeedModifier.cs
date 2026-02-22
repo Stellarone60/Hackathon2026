@@ -13,9 +13,9 @@ namespace Assets.Modifiers
         {
             this.modifierName = "Enemy Speed Modifier";
             this.modifierSprite = Resources.Load<Sprite>("SpeedModifier");
-            this.description = $"Alters the enemies' speed by {valueModfier}.";
             // Get a random value modifier between 0.5 and 1.5, rounded to the nearest tenth.
             valueModfier = (float)Math.Round(UnityEngine.Random.Range(0.5f, 1.5f), 1);
+            this.description = $"Alters the enemies' speed by {valueModfier}.";
         }
         public override void ApplyModifier(List<BasicEnemyScript> enemies)
         {
