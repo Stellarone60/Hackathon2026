@@ -12,7 +12,7 @@ namespace Assets.Modifiers
     {
 
         // Holds the sprite for the modifier, which will be displayed on the trait's icon.
-        private Sprite modifierSprite;
+        public Sprite modifierSprite;
 
         public string modifierName = "";
 

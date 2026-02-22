@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Modifiers
 {
@@ -11,7 +12,15 @@ namespace Assets.Modifiers
         public EnemyHealthModifier()
         {
             this.modifierName = "Enemy Health Modifier";
-            // Set sprite.
+            Debug.Log("Name set");
+            try
+            {
+                this.modifierSprite = Resources.Load<Sprite>("traxigor");
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("Failed to load sprite: " + e.Message);
+            }
         }
         public override void ApplyModifier(List<BasicEnemyScript> enemies)
         {
