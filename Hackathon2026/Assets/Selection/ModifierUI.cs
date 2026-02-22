@@ -1,18 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using Assets.Modifiers;
 
-public class NewBehaviourScript : MonoBehaviour
+
+public class ModifierUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Image icon;
+    public Text nameText;
+    public Image selectionHighlight;
+
+    private ModifierBase modifier;
+    //modifier UI goes here;
+    private bool isSelected = false;
+
+    public void Setup(ModifierBase newModifier) // modifier UI
     {
-        
+        modifier = newModifier;
+        //inventoryUI = ui;
+
+        nameText.text = modifier.modifierName;
+        //icon.sprite = modifier.icon;
+
+        GetComponent<Button>().onClick.AddListener(ToggleSelection);
+        UpdateVisual();
     }
 
-    // Update is called once per frame
-    void Update()
+    void ToggleSelection()
     {
-        
+        isSelected = !isSelected;
+        //inventoryUI.OnModifierSelectionChanged(modifier, isSelected);
+        UpdateVisual();
+    }
+
+    void UpdateVisual()
+    {
+        selectionHighlight.enabled = isSelected;
     }
 }

@@ -10,7 +10,7 @@ namespace Assets.Modifiers
     {
         public EnemyDamageModifier()
         {
-            modifierName = "Enemy Damage Modifier";
+            this.modifierName = "Enemy Damage Modifier";
             // Set sprite.
         }
         public override void ApplyModifier(List<BasicEnemyScript> enemies)
