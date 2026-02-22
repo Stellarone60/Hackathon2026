@@ -148,7 +148,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 20, y: 20}
   m_Direction: 0
 --- !u!114 &1026445577253200772
 MonoBehaviour:
@@ -166,6 +166,7 @@ MonoBehaviour:
   knockbackDecay: 5
   spawnDistance: 1
   dashCooldown: 2
+  attackDuration: 1
   runSpeed: 5
 --- !u!95 &1562165113761504799
 Animator:
