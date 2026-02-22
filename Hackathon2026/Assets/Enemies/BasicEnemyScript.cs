@@ -31,7 +31,7 @@ public class BasicEnemyScript : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
-        enemyAttack = GameObject.FindWithTag("Attack");
+        //enemyAttack = GameObject.FindWithTag("Attack");
         rigidBody = GetComponent<Rigidbody2D>();
     }
 
