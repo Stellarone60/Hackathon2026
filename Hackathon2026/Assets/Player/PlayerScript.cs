@@ -40,7 +40,13 @@ public class PlayerScript : MonoBehaviour
             Vector2.zero,
             Time.deltaTime * knockbackDecay
         );
+        checkAttack();
+        checkDash();
 
+    }
+
+    void checkAttack()
+    {
         if (Input.GetKeyDown(KeyCode.F))
         {
             Debug.Log("Key Pressed");
@@ -48,6 +54,18 @@ public class PlayerScript : MonoBehaviour
         }
         else{
             Debug.Log("Key Not Pressed");
+        }
+    }
+
+    void checkDash()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("Dash Key Pressed");
+            knockbackVelocity = LastMoveDirection.normalized * 10f; // Adjust dash force as needed
+        }
+        else{
+            Debug.Log("Dash Key Not Pressed");
         }
     }
 

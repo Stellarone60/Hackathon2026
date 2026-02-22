@@ -596,6 +596,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: enemyAttack
       objectReference: {fileID: 0}
+    - target: {fileID: 1765136887246865002, guid: 8bd42d7e1bb891c4f9c8ac6a0b5f7ea0, type: 3}
+      propertyPath: m_TagString
+      value: Attack
+      objectReference: {fileID: 0}
     - target: {fileID: 5117686444789196929, guid: 8bd42d7e1bb891c4f9c8ac6a0b5f7ea0, type: 3}
       propertyPath: m_Radius
       value: 0.49804068
