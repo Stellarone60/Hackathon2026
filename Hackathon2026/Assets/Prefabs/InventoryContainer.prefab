@@ -438,7 +438,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 349.1913, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6982638307739116713
 CanvasRenderer:
@@ -477,8 +477,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -495,14 +495,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -732,8 +732,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5454016560554341696}
   m_HandleRect: {fileID: 6550127031048520366}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 1
+  m_Value: 0
+  m_Size: 0.99999446
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1000,8 +1000,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000059436054, y: -0.000006289625}
-  m_SizeDelta: {x: -183, y: 0}
+  m_AnchoredPosition: {x: 0.00053950347, y: -0.000006289625}
+  m_SizeDelta: {x: -19.6432, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &8755771181935549687
 MonoBehaviour:
@@ -1228,6 +1228,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 5485513418320019961}
+  OnConfirmButtonPress:
+    m_PersistentCalls:
+      m_Calls: []
   modifierPrefab: {fileID: 6288590708338809677, guid: 68e2106cd23b1704e8c95544dc498075, type: 3}
   contentParent: {fileID: 715201503532872781}
 --- !u!1001 &876418073353615105
