@@ -34,6 +34,7 @@ public class ModifierView : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         isSelected = !isSelected;
         highlight.SetActive(isSelected);
+        Debug.Log("Clicked on modifier. Highlight set to active " + highlight.activeSelf);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
