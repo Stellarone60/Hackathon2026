@@ -152,7 +152,7 @@ public class PlayerScript : MonoBehaviour
     {
         switch (stat)
         {
-            case "health":
+            case "currentHealth":
                 return(currentHealth);
             case "maxHealth":
                 return(maxHealth);
@@ -175,7 +175,7 @@ public class PlayerScript : MonoBehaviour
     {
         switch (stat)
         {
-            case "health":
+            case "currentHealth":
                 currentHealth = value;
                 break;
             case "maxHealth":
@@ -203,7 +203,7 @@ public class PlayerScript : MonoBehaviour
     {
         switch (stat)
         {
-            case "health":
+            case "currentHealth":
                 currentHealth += value;
                 break;
             case "maxHealth":
@@ -231,7 +231,7 @@ public class PlayerScript : MonoBehaviour
     {
         switch (stat)
         {
-            case "health":
+            case "currentHealth":
                 currentHealth -= value;
                 takeDamage();
                 break;
@@ -260,7 +260,7 @@ public class PlayerScript : MonoBehaviour
     {
         switch (stat)
         {
-            case "health":
+            case "currentHealth":
                 currentHealth *= value;
                 break;
             case "maxHealth":
@@ -288,7 +288,7 @@ public class PlayerScript : MonoBehaviour
     {
         switch (stat)
         {
-            case "health":
+            case "currentHealth":
                 currentHealth /= value;
                 break;
             case "maxHealth":

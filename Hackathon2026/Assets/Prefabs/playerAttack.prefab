@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knockbackForce: 10
+  playerScript: {fileID: 8531071914063825691, guid: 193944909501e7b48b2fdc4cefbf10d6, type: 3}
 --- !u!95 &9204866268568263840
 Animator:
   serializedVersion: 5

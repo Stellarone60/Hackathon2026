@@ -14,14 +14,13 @@ public class BasicEnemyAttackScript : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             PlayerScript player = other.GetComponent<PlayerScript>();
-           // BasicEnemyScript enemy = enemyScript.GetComponent<BasicEnemyScript>();
+            BasicEnemyScript enemy = enemyScript.GetComponent<BasicEnemyScript>();
 
             if (player != null)
             {
                 Vector2 knockbackDirection =
                     ((other.transform.position - transform.position)).normalized;
-               // Debug.Log("Damage" + enemy.getEnemyStats("damage"));
-               // player.subtractFromStats("health", 5f);
+                player.subtractFromStats("currentHealth", enemy.getEnemyStats("damage"));
                 player.ApplyKnockback(knockbackDirection, knockbackForce);
             }
         }
