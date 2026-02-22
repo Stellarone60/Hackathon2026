@@ -9,6 +9,7 @@ public class PlayerScript : MonoBehaviour
     public float knockbackDecay = 5f;
     public float spawnDistance = 1f;  // How far in front
     public float dashCooldown = 2f;
+    public float attackCooldown = 1f;
     private GameObject attack = null;   
     private Rigidbody2D rb;
     private CapsuleCollider2D cc;
@@ -16,6 +17,7 @@ public class PlayerScript : MonoBehaviour
     public float attackDuration = 1f;
     private Vector2 LastMoveDirection = Vector2.zero;
     private float lastDashTime = -Mathf.Infinity; // Initialize to allow immediate dash
+    private float lastAttackTime = -Mathf.Infinity;
     private SpriteRenderer sr;
 
     public float runSpeed = 20.0f;
@@ -24,8 +26,8 @@ public class PlayerScript : MonoBehaviour
 
     //%%%%%%%%%%%%%%//
     // Player Stats //
-    private float currentHealth = 20f;
-    private float maxHealth = 20f;
+    private float currentHealth = 100f;
+    private float maxHealth = 100f;
     private float damage = 5f;
     private float movementSpeed = 2.5f;
     private int level = 1;
@@ -39,8 +41,6 @@ public class PlayerScript : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         //animator = GetComponent<Animator>();
         animator = GetComponentInChildren<Animator>();
-
-
     }
 
     void Update()
@@ -53,7 +53,12 @@ public class PlayerScript : MonoBehaviour
         );
         checkAttack();
         checkDash();
-
+        Debug.Log("Player Health: " + currentHealth);
+        if (currentHealth <= 0)
+        {
+            Debug.Log("Player has died.");
+            // Implement death behavior here (e.g., respawn, game over screen, etc.)
+        }
         ApplyAnimation();
     }
 
@@ -61,11 +66,15 @@ public class PlayerScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            Debug.Log("Key Pressed");
+           // Debug.Log("Key Pressed");
+            if (Time.time >= lastAttackTime + attackCooldown)
+            {
             Invoke(nameof(LaunchAttack), 0f);
+            lastAttackTime = Time.time;
+            }
         }
         else{
-            Debug.Log("Key Not Pressed");
+           // Debug.Log("Key Not Pressed");
         }
     }
 
@@ -73,7 +82,7 @@ public class PlayerScript : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("Dash Key Pressed");
+           // Debug.Log("Dash Key Pressed");
             if (Time.time >= lastDashTime + dashCooldown)
             {
                 knockbackVelocity = LastMoveDirection.normalized * 10f; // Adjust dash force as needed
@@ -81,7 +90,7 @@ public class PlayerScript : MonoBehaviour
             }
         }
         else{
-            Debug.Log("Dash Key Not Pressed");
+          //  Debug.Log("Dash Key Not Pressed");
         }
     }
 
@@ -98,6 +107,17 @@ public class PlayerScript : MonoBehaviour
     void FixedUpdate()
     {
         MovePlayer();
+    }
+
+    void takeDamage()
+    {
+        sr.color = Color.red;
+        Invoke(nameof(ResetDamageColor), 0.2f);
+    }
+
+    void ResetDamageColor()
+    {
+        sr.color = Color.white;
     }
 
     void MovePlayer()
@@ -145,7 +165,7 @@ public class PlayerScript : MonoBehaviour
             case "experience":
                 return(experience);
             default:
-                Debug.Log("Invalid stat requested");
+               // Debug.Log("Invalid stat requested");
                 break;
         }
         return(-Mathf.Infinity);
@@ -174,7 +194,7 @@ public class PlayerScript : MonoBehaviour
                 experience = value;
                 break;
             default:
-                Debug.Log("Invalid stat change requested");
+              //  Debug.Log("Invalid stat change requested");
                 break;
         }
     }
@@ -202,17 +222,18 @@ public class PlayerScript : MonoBehaviour
                 experience += value;
                 break;
             default:
-                Debug.Log("Invalid stat change requested");
+              //  Debug.Log("Invalid stat change requested");
                 break;
         }
     }
 
-    public void substractFromStats(string stat, float value)
+    public void subtractFromStats(string stat, float value)
     {
         switch (stat)
         {
             case "health":
                 currentHealth -= value;
+                takeDamage();
                 break;
             case "maxHealth":
                 maxHealth -= value;
@@ -230,7 +251,7 @@ public class PlayerScript : MonoBehaviour
                 experience -= value;
                 break;
             default:
-                Debug.Log("Invalid stat change requested");
+               // Debug.Log("Invalid stat change requested");
                 break;
         }
     }
@@ -258,7 +279,7 @@ public class PlayerScript : MonoBehaviour
                 experience *= value;
                 break;
             default:
-                Debug.Log("Invalid stat change requested");
+               // Debug.Log("Invalid stat change requested");
                 break;
         }
     }
@@ -286,7 +307,7 @@ public class PlayerScript : MonoBehaviour
                 experience /= value;
                 break;
             default:
-                Debug.Log("Invalid stat change requested");
+              //  Debug.Log("Invalid stat change requested");
                 break;
         }
     }

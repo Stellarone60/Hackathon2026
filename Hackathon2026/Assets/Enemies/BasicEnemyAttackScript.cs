@@ -16,7 +16,7 @@ public class BasicEnemyAttackScript : MonoBehaviour
             {
                 Vector2 knockbackDirection =
                     (player.getVelocity() + (other.transform.position - transform.position)).normalized;
-
+                player.subtractFromStats("health", 10f);
                 player.ApplyKnockback(knockbackDirection, 5f);
             }
         }
