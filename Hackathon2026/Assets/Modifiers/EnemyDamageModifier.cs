@@ -13,8 +13,11 @@ namespace Assets.Modifiers
         {
             this.modifierName = "Enemy Damage Modifier";
             this.modifierSprite = Resources.Load<Sprite>("AttackModifier");
-            // Get a random value modifier between 0.5 and 1.5, rounded to the nearest tenth.
-            valueModfier = (float)Math.Round(UnityEngine.Random.Range(0.5f, 1.5f), 1);
+            // Get a random value modifier between 0.5 and 1.5, rounded to the nearest tenth. Avoid getting 1.
+            do
+            {
+                valueModfier = (float)Math.Round(UnityEngine.Random.Range(0.5f, 1.5f), 1);
+            } while (valueModfier == 1);
             this.description = $"Alters the enemies' damage by {valueModfier}.";
         }
         public override void ApplyModifier(List<BasicEnemyScript> enemies)
