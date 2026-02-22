@@ -8,6 +8,7 @@ public class RoomManager : MonoBehaviour
     public GameObject spawnerPrefab;
     public GameObject[] enemyPrefabs;
     public GameObject[] propPrefabs;
+    public GameObject chestPrefab;
 
     [Header("Room Settings")]
     public int minEnemyCount, maxEnemyCount;
@@ -42,6 +43,11 @@ public class RoomManager : MonoBehaviour
 
     }
 
+    void spawnChest()
+    {
+        Instantiate(chestPrefab, Vector3.zero, Quaternion.identity);
+    }
+
     void startRoom()
     {
         createSpawners();
@@ -52,6 +58,7 @@ public class RoomManager : MonoBehaviour
     void Start()
     {
         startRoom();
+        spawnChest();
     }
 
     // Update is called once per frame
