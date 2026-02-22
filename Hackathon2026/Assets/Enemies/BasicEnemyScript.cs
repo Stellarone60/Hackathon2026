@@ -15,6 +15,7 @@ public class BasicEnemyScript : MonoBehaviour
     public float knockbackDecay = 5f;
     private float timeSinceWithinRange = 0f;
     private float maxTimeOutOfRange = 5f; 
+    private bool pauseNormalBehavior = false; // Flag to pause normal behavior during knockback
 
     private float lastAttackTime = -Mathf.Infinity; // Initialize to allow immediate attack
 
@@ -27,12 +28,14 @@ public class BasicEnemyScript : MonoBehaviour
     //%%%%%%%%%%%%%//
 
     Rigidbody2D rigidBody;
+    SpriteRenderer sr;
 
     void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
         //enemyAttack = GameObject.FindWithTag("Attack");
         rigidBody = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     void FixedUpdate()
@@ -80,10 +83,13 @@ public class BasicEnemyScript : MonoBehaviour
         {
             timeSinceWithinRange = 0f;
         }
-
+        if (pauseNormalBehavior)
+        {
+            return; // Skip normal behavior while knockback is active
+        }
         if (distanceToPlayer < enemyAttackRange)
         {
-            GetComponent<SpriteRenderer>().color = Color.yellow;
+            GetComponent<SpriteRenderer>().color = new Color32(211, 211, 211, 255);
 
             if (Time.time >= lastAttackTime + attackCooldown)
             {
@@ -94,7 +100,7 @@ public class BasicEnemyScript : MonoBehaviour
         }
         else
         {
-            GetComponent<SpriteRenderer>().color = Color.red;
+            GetComponent<SpriteRenderer>().color = Color.gray;
         }
     }
 
@@ -215,12 +221,28 @@ public class BasicEnemyScript : MonoBehaviour
         }
     }
 
+    void takeDamage()
+    {
+        pauseNormalBehavior = true; // Pause normal behavior during knockback
+        sr.color = Color.red;
+        Invoke(nameof(ResetDamageColor), 0.2f);
+    }
+
+    void ResetDamageColor()
+    {
+
+        pauseNormalBehavior = false; // Resume normal behavior after knockback
+        sr.color = Color.gray;
+    }
+
+
     public void subtractFromStats(string stat, float value)
     {
         switch (stat)
         {
             case "currentHealth":
                 currentHealth -= value;
+                takeDamage();
                 if (currentHealth <= 0)
                 {
                     Destroy(gameObject);
