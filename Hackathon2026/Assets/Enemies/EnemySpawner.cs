@@ -17,7 +17,7 @@ public class EnemySpawner : MonoBehaviour
         for (int i = 0; i < enemyCount; i++) 
         {
             Vector3 spawnPos = new Vector3(
-                Random.Range(1, roomWidth - 1) - roomHeight / 2,
+                Random.Range(1, roomWidth - 1) - roomWidth / 2,
                 Random.Range(1, roomHeight - 1) - roomHeight / 2
             );
 
