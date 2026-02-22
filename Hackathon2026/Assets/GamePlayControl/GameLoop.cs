@@ -134,7 +134,32 @@ public class GameLoopManager : MonoBehaviour {
 
         currentState = GameState.Combat;
 
-        // TODO: apply modifiers to player stats here, if they affect combat.
+        foreach(var mod in activeModifiers)
+        {
+            if(mod is EnemyModifier)
+            {
+                EnemyModifier enemyMod = mod as EnemyModifier;
+
+                List<BasicEnemyScript> enemyScripts = new List<BasicEnemyScript>();
+
+                // get a list of the Enemy scripts from the enemy prefabs
+                foreach (var prefab in roomManager.enemyPrefabs)
+                {
+                    BasicEnemyScript enemyScript = prefab.GetComponent<BasicEnemyScript>();
+                    if (enemyScript != null)
+                    {
+                        enemyScripts.Add(enemyScript);
+                    }
+                }
+
+                enemyMod.ApplyModifier(enemyScripts);
+            }
+            else if(mod is RoomModifier)
+            {
+                RoomModifier roomMod = mod as RoomModifier;
+                roomMod.ApplyModifier(roomManager);
+            }
+        }
 
         playerInventory.Clear();
 
