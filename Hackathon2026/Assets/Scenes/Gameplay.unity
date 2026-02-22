@@ -1482,11 +1482,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 715201503532872781, guid: c4e35bf2239a84f8ba0258d861d3d897, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.000015258789
+      value: 0.00097262865
       objectReference: {fileID: 0}
     - target: {fileID: 715201503532872781, guid: c4e35bf2239a84f8ba0258d861d3d897, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.00001859665
+      value: -0.0000016763806
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817629077335720360, guid: c4e35bf2239a84f8ba0258d861d3d897, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2706208522538908240, guid: c4e35bf2239a84f8ba0258d861d3d897, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1511,6 +1515,10 @@ PrefabInstance:
     - target: {fileID: 3738703880415384802, guid: c4e35bf2239a84f8ba0258d861d3d897, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913503716358427369, guid: c4e35bf2239a84f8ba0258d861d3d897, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4726889419082496248, guid: c4e35bf2239a84f8ba0258d861d3d897, type: 3}
       propertyPath: m_text
@@ -1783,6 +1791,18 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 715201503532872781, guid: c4e35bf2239a84f8ba0258d861d3d897, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.00097262865
+      objectReference: {fileID: 0}
+    - target: {fileID: 715201503532872781, guid: c4e35bf2239a84f8ba0258d861d3d897, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.0000016763806
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817629077335720360, guid: c4e35bf2239a84f8ba0258d861d3d897, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2706208522538908240, guid: c4e35bf2239a84f8ba0258d861d3d897, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1806,6 +1826,10 @@ PrefabInstance:
     - target: {fileID: 3738703880415384802, guid: c4e35bf2239a84f8ba0258d861d3d897, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913503716358427369, guid: c4e35bf2239a84f8ba0258d861d3d897, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4726889419082496248, guid: c4e35bf2239a84f8ba0258d861d3d897, type: 3}
       propertyPath: m_text
@@ -1867,12 +1891,20 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6550127031048520366, guid: c4e35bf2239a84f8ba0258d861d3d897, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7266022415438187712, guid: c4e35bf2239a84f8ba0258d861d3d897, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7266022415438187712, guid: c4e35bf2239a84f8ba0258d861d3d897, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7266022415438187712, guid: c4e35bf2239a84f8ba0258d861d3d897, type: 3}
+      propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7734389012725023660, guid: c4e35bf2239a84f8ba0258d861d3d897, type: 3}
@@ -3395,8 +3427,7 @@ MonoBehaviour:
   spawnerPrefab: {fileID: 4498811970750799131, guid: c763edaf5a1004c478540bd3321eb909, type: 3}
   enemyPrefabs:
   - {fileID: 5456506475817639883, guid: 2d67b6f6ab7cab14eb191e9227a0717e, type: 3}
-  propPrefabs:
-  - {fileID: 2917223455403114808, guid: 0773e805a87eaaf4d95dba106780bdc8, type: 3}
+  propPrefabs: []
   chestPrefab: {fileID: 4506450158442384137, guid: aa8ec0b694333e447920465b89912822, type: 3}
   Player: {fileID: 2143469323}
 --- !u!114 &1915659213

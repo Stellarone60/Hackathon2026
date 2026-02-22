@@ -2522,13 +2522,15 @@ MonoBehaviour:
   spawnerPrefab: {fileID: 4498811970750799131, guid: c763edaf5a1004c478540bd3321eb909, type: 3}
   enemyPrefabs:
   - {fileID: 5456506475817639883, guid: 2d67b6f6ab7cab14eb191e9227a0717e, type: 3}
+  - {fileID: 7238914854827022447, guid: 98f902816215e2a47a007e8788a78d75, type: 3}
   propPrefabs:
   - {fileID: 2917223455403114808, guid: 0773e805a87eaaf4d95dba106780bdc8, type: 3}
   - {fileID: 6998988360680781084, guid: d9531b43c406a79448435df7bd0ab7b8, type: 3}
+  - {fileID: 6998988360680781084, guid: d9531b43c406a79448435df7bd0ab7b8, type: 3}
   chestPrefab: {fileID: 4506450158442384137, guid: aa8ec0b694333e447920465b89912822, type: 3}
-  minEnemyCount: 1
-  maxEnemyCount: 1
-  roomWidth: 14
+  minEnemyCount: 2
+  maxEnemyCount: 2
+  roomWidth: 12
   roomHeight: 6
 --- !u!4 &1552242182
 Transform:

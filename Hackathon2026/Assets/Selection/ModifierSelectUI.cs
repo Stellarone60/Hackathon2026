@@ -25,18 +25,19 @@ public class ModifierSelectUI : MonoBehaviour
 
     void Start()
     {
-        playerInventory.Add(new EnemySpeedModifier());
-        playerInventory.Add(new EnemySpeedModifier());
-        playerInventory.Add(new EnemySpeedModifier());
         inventory.SetActive(isInventoryOpen);
         
-        ShowModifiers();
+        //ShowModifiers();
         //PopulateUI();
     }
 
     public void SetIfActive(bool active)
     {
         inventory.SetActive(active);
+        if (active)
+        {
+            ShowModifiers();
+        }
     }
 
     public void HandleButtonPress()
