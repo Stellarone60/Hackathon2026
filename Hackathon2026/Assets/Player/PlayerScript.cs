@@ -7,12 +7,14 @@ public class PlayerScript : MonoBehaviour
     public GameObject attackPrefab;
     public float knockbackDecay = 5f;
     public float spawnDistance = 1f;  // How far in front
+    public float dashCooldown = 2f;
     private GameObject attack = null;   
     private Rigidbody2D rb;
     private CapsuleCollider2D cc;
     private Vector2 knockbackVelocity = Vector2.zero;
     private float attackDuration = 1f;
     private Vector2 LastMoveDirection = Vector2.zero;
+    private float lastDashTime = -Mathf.Infinity; // Initialize to allow immediate dash
 
     public float runSpeed = 20.0f;
 
@@ -42,7 +44,6 @@ public class PlayerScript : MonoBehaviour
         );
         checkAttack();
         checkDash();
-
     }
 
     void checkAttack()
@@ -62,7 +63,11 @@ public class PlayerScript : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("Dash Key Pressed");
-            knockbackVelocity = LastMoveDirection.normalized * 10f; // Adjust dash force as needed
+            if (Time.time >= lastDashTime + dashCooldown)
+            {
+                knockbackVelocity = LastMoveDirection.normalized * 10f; // Adjust dash force as needed
+                lastDashTime = Time.time;
+            }
         }
         else{
             Debug.Log("Dash Key Not Pressed");
@@ -105,6 +110,11 @@ public class PlayerScript : MonoBehaviour
     public Vector3 getVelocity()
     {
         return rb.velocity;
+    }
+
+    public float getCooldownPercent()
+    {
+        return 1f - (dashCooldown - (Time.time - lastDashTime));
     }
     
     public float getPlayerStats(string stat)
