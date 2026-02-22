@@ -4,16 +4,32 @@ using UnityEngine;
 [RequireComponent(typeof(CapsuleCollider2D))]
 public class PlayerScript : MonoBehaviour
 {
+    public GameObject attackPrefab;
     public float knockbackDecay = 5f;
-    
+    public float spawnDistance = 1f;  // How far in front
+    private GameObject attack = null;   
     private Rigidbody2D rb;
+    private CapsuleCollider2D cc;
     private Vector2 knockbackVelocity = Vector2.zero;
+    private float attackDuration = 1f;
+    private Vector2 LastMoveDirection = Vector2.zero;
 
     public float runSpeed = 20.0f;
+
+    //%%%%%%%%%%%%%%//
+    // Player Stats //
+    private float currentHealth = 20f;
+    private float maxHealth = 20f;
+    private float damage = 5f;
+    private float movementSpeed = 2.5f;
+    private int level = 1;
+    private float experience = 0f;
+    //%%%%%%%%%%%%%//
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        cc = GetComponent<CapsuleCollider2D>();
     }
 
     void Update()
@@ -24,6 +40,26 @@ public class PlayerScript : MonoBehaviour
             Vector2.zero,
             Time.deltaTime * knockbackDecay
         );
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Debug.Log("Key Pressed");
+            Invoke(nameof(LaunchAttack), 0.5f);
+           // lastAttackTime = Time.time;
+        }
+        else{
+            Debug.Log("Key Not Pressed");
+        }
+    }
+
+    void LaunchAttack()
+    {
+        Vector2 direction = LastMoveDirection != Vector2.zero ? LastMoveDirection : Vector2.up; // Default to up if no movement
+        Vector2 spawnPosition = (Vector2)transform.position + direction * spawnDistance;
+
+        attack = Instantiate(attackPrefab, spawnPosition, Quaternion.identity);
+
+        Destroy(attack, attackDuration);
     }
 
     void FixedUpdate()
@@ -38,6 +74,11 @@ public class PlayerScript : MonoBehaviour
 
         Vector2 inputDirection = new Vector2(x, y).normalized;
 
+        if (inputDirection != Vector2.zero)
+        {
+            LastMoveDirection = inputDirection;
+        }
+
         rb.velocity = inputDirection * runSpeed + knockbackVelocity;
     }
     public void ApplyKnockback(Vector2 direction, float force)
@@ -47,5 +88,168 @@ public class PlayerScript : MonoBehaviour
     public Vector3 getVelocity()
     {
         return rb.velocity;
+    }
+    
+    public float getPlayerStats(string stat)
+    {
+        switch (stat)
+        {
+            case "health":
+                return(currentHealth);
+            case "maxHealth":
+                return(maxHealth);
+            case "damage":
+                return(damage);
+            case "movementSpeed":
+                return(movementSpeed);
+            case "level":
+                return((float)level);
+            case "experience":
+                return(experience);
+            default:
+                Debug.Log("Invalid stat requested");
+                break;
+        }
+        return(-Mathf.Infinity);
+    }
+
+    public void setPlayerStats(string stat, float value)
+    {
+        switch (stat)
+        {
+            case "health":
+                currentHealth = value;
+                break;
+            case "maxHealth":
+                maxHealth = value;
+                break;
+            case "damage":
+                damage = value;
+                break;
+            case "movementSpeed":
+                movementSpeed = value;
+                break;
+            case "level":
+                level = (int)value;
+                break;
+            case "experience":
+                experience = value;
+                break;
+            default:
+                Debug.Log("Invalid stat change requested");
+                break;
+        }
+    }
+
+    public void addToStats(string stat, float value)
+    {
+        switch (stat)
+        {
+            case "health":
+                currentHealth += value;
+                break;
+            case "maxHealth":
+                maxHealth += value;
+                break;
+            case "damage":
+                damage += value;
+                break;
+            case "movementSpeed":
+                movementSpeed += value;
+                break;
+            case "level":
+                level += (int)value;
+                break;
+            case "experience":
+                experience += value;
+                break;
+            default:
+                Debug.Log("Invalid stat change requested");
+                break;
+        }
+    }
+
+    public void substractFromStats(string stat, float value)
+    {
+        switch (stat)
+        {
+            case "health":
+                currentHealth -= value;
+                break;
+            case "maxHealth":
+                maxHealth -= value;
+                break;
+            case "damage":
+                damage -= value;
+                break;
+            case "movementSpeed":
+                movementSpeed -= value;
+                break;
+            case "level":
+                level -= (int)value;
+                break;
+            case "experience":
+                experience -= value;
+                break;
+            default:
+                Debug.Log("Invalid stat change requested");
+                break;
+        }
+    }
+
+    public void multToStats(string stat, float value)
+    {
+        switch (stat)
+        {
+            case "health":
+                currentHealth *= value;
+                break;
+            case "maxHealth":
+                maxHealth *= value;
+                break;
+            case "damage":
+                damage *= value;
+                break;
+            case "movementSpeed":
+                movementSpeed *= value;
+                break;
+            case "level":
+                level = (int)(level * value);
+                break;
+            case "experience":
+                experience *= value;
+                break;
+            default:
+                Debug.Log("Invalid stat change requested");
+                break;
+        }
+    }
+
+    public void divToStats(string stat, float value)
+    {
+        switch (stat)
+        {
+            case "health":
+                currentHealth /= value;
+                break;
+            case "maxHealth":
+                maxHealth /= value;
+                break;
+            case "damage":
+                damage /= value;
+                break;
+            case "movementSpeed":
+                movementSpeed /= value;
+                break;
+            case "level":
+                level = (int)(level / value);
+                break;
+            case "experience":
+                experience /= value;
+                break;
+            default:
+                Debug.Log("Invalid stat change requested");
+                break;
+        }
     }
 }

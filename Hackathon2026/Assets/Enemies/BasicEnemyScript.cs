@@ -26,6 +26,8 @@ public class BasicEnemyScript : MonoBehaviour
 
     void Start()
     {
+        player = GameObject.FindWithTag("Player").transform;
+        circlePrefab = GameObject.FindWithTag("Attack");
         rigidBody = GetComponent<Rigidbody2D>();
     }
 
